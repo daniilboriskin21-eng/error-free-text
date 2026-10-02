@@ -3,6 +3,7 @@ package com.example.errorfreetext.task;
 import com.example.errorfreetext.task.dto.CreateTaskRequest;
 import com.example.errorfreetext.task.dto.CreateTaskResponse;
 import com.example.errorfreetext.task.dto.TaskResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class TextCorrectionTaskController {
 
     @PostMapping
     public ResponseEntity<CreateTaskResponse> createTask(
-            @RequestBody CreateTaskRequest request) {
+            @Valid @RequestBody CreateTaskRequest request) {
         UUID id = taskService.createTask(request.text(), request.language());
 
         URI location = URI.create("/tasks/" + id);
